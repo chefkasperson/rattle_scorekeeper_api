@@ -10,11 +10,6 @@ class CreateGames < ActiveRecord::Migration[6.0]
       t.integer :winner_id
       t.string :status
       t.integer :dealer
-      t.integer :games_played
-      t.integer :most_wins
-      t.integer :total_sets
-      t.integer :most_sets
-      t.integer :average_game_length
 
       t.timestamps
     end
