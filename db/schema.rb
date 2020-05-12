@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_005724) do
     t.integer "player_1"
     t.integer "player_2"
     t.integer "player_3"
-    t.integer "p1_score"
-    t.integer "p2_score"
-    t.integer "p3_score"
+    t.integer "p1_score", default: 0
+    t.integer "p2_score", default: 0
+    t.integer "p3_score", default: 0
     t.integer "winner_id"
     t.string "status", default: "incomplete"
     t.integer "dealer"
