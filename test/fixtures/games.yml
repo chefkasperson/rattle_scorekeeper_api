@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_1: 1
+  player_2: 1
+  player_3: 1
+  winner_id: 1
+  status: MyString
+  dealer: 1
+  games_played: 1
+  most_wins: 1
+  total_sets: 1
+  most_sets: 1
+  average_game_length: 1
+
+two:
+  player_1: 1
+  player_2: 1
+  player_3: 1
+  winner_id: 1
+  status: MyString
+  dealer: 1
+  games_played: 1
+  most_wins: 1
+  total_sets: 1
+  most_sets: 1
+  average_game_length: 1
