@@ -5,6 +5,7 @@ class CreateHands < ActiveRecord::Migration[6.0]
       t.string :p2_score
       t.string :p3_score
       t.string :bid
+      t.integer :bidder_id
       t.belongs_to :game, null: false, foreign_key: true
 
       t.timestamps

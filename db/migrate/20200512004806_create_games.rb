@@ -8,7 +8,7 @@ class CreateGames < ActiveRecord::Migration[6.0]
       t.integer :p2_score
       t.integer :p3_score
       t.integer :winner_id
-      t.string :status
+      t.string :status, default: "incomplete"
       t.integer :dealer
 
       t.timestamps
