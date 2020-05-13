@@ -5,23 +5,56 @@ class Game < ApplicationRecord
   belongs_to :player_3, class_name: 'Player', foreign_key: "player_3"
   belongs_to :dealer, class_name: 'Player', foreign_key: "dealer"
 
+  def play
+    if self.status == 'incomplete'
+      hand = self.hands.last
+      self.play_hand(hand)
+      self.update_game
+    else
+      self
+    end
+  end
+
   def play_hand(hand)
     updated_score = hand.update_game_score
- 
+
     self.p1_score = updated_score[0]
     self.p2_score = updated_score[1]
     self.p3_score = updated_score[2]
-    self.save
+    
   end
 
-  def check_status
-    if self.p1_score >= 32 || self.p2_score >= 32 || self.p3_score >= 32
-      self.status = 'finished'
-      determine_winner
+  def update_game
+    if game_over?
+      self.update_status
+      self.determine_winner
       self.save
     else
-      return "no winner yet"
+      self.update_dealer
+      self.save
     end
+  end
+
+  def update_dealer
+    if self.dealer == self.player_1
+      self.dealer = self.player_2
+    elsif self.dealer == self.player_2
+      self.dealer = self.player_3
+    elsif self.dealer == self.player_3
+      self.dealer = self.player_1
+    end
+  end
+
+  def game_over?
+    if self.p1_score >= 32 || self.p2_score >= 32 || self.p3_score >= 32
+      true
+    else
+      false
+    end
+  end
+
+  def update_status
+    self.status = 'finished'
   end
 
   def determine_winner
@@ -56,5 +89,9 @@ class Game < ApplicationRecord
     elsif index == 2
       self.winner_id = self.player_3.id
     end
+  end
+
+  def winner
+    Player.find_by(id: self.winner_id)
   end
 end
