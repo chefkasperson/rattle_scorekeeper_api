@@ -1,10 +1,8 @@
 class Api::V1::HandsController < ApplicationController
 
   def index
-    players = Players.all
-    render json: {
-      players: players.as_json(except: [:created_at, :updated_at])
-    }
+   hands = Hand.all 
+   render json: {hands: hands.as_json(except: [:created_at, :updated_at])}
   end
 
   def create
