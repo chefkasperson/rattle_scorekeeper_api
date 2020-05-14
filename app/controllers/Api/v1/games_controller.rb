@@ -8,7 +8,7 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
-
+    binding.pry
   end
 
 end
