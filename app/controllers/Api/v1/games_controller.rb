@@ -8,7 +8,29 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
-    binding.pry
+    p1 = Player.find_by(name: game_params[:player_1])
+    p2 = Player.find_by(name: game_params[:player_2])
+    p3 = Player.find_by(name: game_params[:player_3])
+    dp = game_params[:dealer]
+    if dp == 1
+      dealer = p1
+    elsif dp == 2
+      dealer = p2
+    else
+      dealer = p3
+    end
+    game = Game.new(player_1: p1, player_2: p2, player_3: p3, dealer: dealer)
+
+    if game.save
+      render json: game, status: :created
+    else
+      render json: error_message, status: :unprocessable_entity
+    end
   end
 
+  private
+
+  def game_params
+    params.require('game').permit(:player_1, :player_2, :player_3, :dealer)
+  end 
 end
