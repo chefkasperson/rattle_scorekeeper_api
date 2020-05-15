@@ -46,7 +46,7 @@ class Api::V1::HandsController < ApplicationController
     if hand.valid? && hand.valid_status? && hand.valid_score?
       hand.save
       game.play
-      render json: hand
+      render json: game.as_json(include: [:hands])
     else
       render json: { error: hand.errors, status: :unprocessable_entity}
     end
