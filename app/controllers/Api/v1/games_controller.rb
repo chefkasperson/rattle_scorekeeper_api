@@ -3,7 +3,7 @@ class Api::V1::GamesController < ApplicationController
   def index
     games = Game.all 
     render json: {
-      games: games.as_json(except: [:created_at, :updated_at])
+      games: games.as_json(except: [:created_at, :updated_at], include: [:hands])
     }
   end
 
@@ -12,9 +12,9 @@ class Api::V1::GamesController < ApplicationController
     p2 = Player.find_by(name: game_params[:player_2])
     p3 = Player.find_by(name: game_params[:player_3])
     dp = game_params[:dealer]
-    if dp == 1
+    if dp == '1'
       dealer = p1
-    elsif dp == 2
+    elsif dp == '2'
       dealer = p2
     else
       dealer = p3
@@ -22,9 +22,9 @@ class Api::V1::GamesController < ApplicationController
     game = Game.new(player_1: p1, player_2: p2, player_3: p3, dealer: dealer)
 
     if game.save
-      render json: game, status: :created
+      render json: game.as_json(include: [:hands]), status: :created
     else
-      render json: error_message, status: :unprocessable_entity
+      render json: {error: game.errors.full_messages, status: :unprocessable_entity}
     end
   end
 
