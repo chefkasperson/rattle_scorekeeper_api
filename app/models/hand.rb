@@ -27,6 +27,23 @@ class Hand < ApplicationRecord
 
   end
 
+  def bidder_score
+    if bidder_id == self.game.player_1.id 
+      return self.game.p1_score
+    elsif bidder_id == self.game.player_2.id
+      return self.game.p2_score
+    else
+      return self.game.p3_score
+    end
+  end
+
+  def valid_bid?
+    if bid == 'moon' && self.bidder_score < 0
+      return false
+    end
+    true
+  end
+
   def valid_status?
     if trump == 'no-trump'
       if p1_status == 'pass' || p2_status == 'pass' || p3_status == 'pass'
