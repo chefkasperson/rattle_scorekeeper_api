@@ -41,9 +41,8 @@ class Api::V1::HandsController < ApplicationController
     end 
     hand.bid = hand_params[:bid]
     hand.trump = hand_params[:trump]
-    binding.pry
 
-    if hand.valid? && hand.valid_status? && hand.valid_score?
+    if hand.valid? && hand.valid_status? && hand.valid_score? && hand.valid_bid?
       hand.save
       game.play
       render json: game.as_json(include: [:hands])
