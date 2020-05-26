@@ -11,10 +11,10 @@ class Hand < ApplicationRecord
   validates :p2_status, presence: true
   validates :p3_status, presence: true
 
-  BIDS = ['2', '3', '4', '5', '6', '7', '8', 'Moon']
-  TRUMP = ['hearts', 'spades', 'diamonds', 'clubs', 'no-trump']
-  SCORES = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-  STATUS = ['pass', 'stay', 'bid']
+  # BIDS = ['2', '3', '4', '5', '6', '7', '8', 'Moon']
+  # TRUMP = ['hearts', 'spades', 'diamonds', 'clubs', 'no-trump']
+  # SCORES = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  # STATUS = ['pass', 'stay', 'bid']
   
 
   def update_game_score
@@ -77,7 +77,7 @@ class Hand < ApplicationRecord
       elsif p1_score.to_i >= bid.to_i
         self.game.p1_score + p1_score.to_i
       else
-        self.game.p1_score - p1_score.to_i
+        self.game.p1_score - 8
       end
     end  
   end
@@ -102,7 +102,7 @@ class Hand < ApplicationRecord
       elsif p2_score.to_i >= bid.to_i
         self.game.p2_score + p2_score.to_i
       else
-        self.game.p2_score - p2_score.to_i
+        self.game.p2_score - 8
       end
     end  
   end
@@ -127,7 +127,7 @@ class Hand < ApplicationRecord
       elsif p3_score.to_i >= bid.to_i
         self.game.p3_score + p3_score.to_i
       else
-        self.game.p3_score - p3_score.to_i
+        self.game.p3_score - 8
       end
     end  
   end
